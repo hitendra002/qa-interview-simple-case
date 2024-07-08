@@ -4,6 +4,13 @@ export const setupDir = 'playwright/.setup'
 export const setupFile = `${setupDir}/user.json`
 
 export default defineConfig({
+  //Generate HTML report
+  reporter: 'html',
+
+  use: {
+    actionTimeout: 60 * 1000,
+  },
+
   projects: [
     // Setup project
     { name: 'setup', testDir: './test-setup/', testMatch: '*' },
@@ -14,6 +21,7 @@ export default defineConfig({
         ...devices['Desktop Chrome'],
         // Use "database" with existing accounts
         storageState: setupFile,
+        baseURL: 'http://localhost:8080/'
       },
       dependencies: ['setup'],
     },
